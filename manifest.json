@@ -1,0 +1,30 @@
+{
+  "name": "Scandaloh Plugin Beta",
+  "version": "1",
+  "description": "Plugin para Scandaloh. Agregador de contenidos",
+  "permissions": ["tabs", "http://*/*", "https://*/*", "background", "notifications", "contextMenus"],
+  "background": {
+    "page" : "html/background.html"
+  },
+  "browser_action": {
+    "default_icon" : "images/scandaloh_19.png",
+    "default_popup" : "html/login.html"
+  },
+  "icons" : {
+    "16": "images/scandaloh_16.png",
+    "48": "images/scandaloh_48.png",
+    "128": "images/scandaloh_144.png"
+  },
+  "content_scripts": [
+      {
+          "matches": ["<all_urls>"],
+          "js": ["src/best_image_fit.js", "src/vendor/jquery.min.js", "src/image_resolver.js",
+                 "src/vendor/URI.min.js"]
+      }
+  ],
+  "manifest_version": 2,
+  "web_accessible_resources": [
+      "images/scandaloh_48.png",
+      "images/scandaloh_19.png"
+  ]
+}

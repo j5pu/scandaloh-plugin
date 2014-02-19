@@ -1,0 +1,45 @@
+body {
+    background-color: #5199ff;
+    font: normal 11px verdana, arial, tahoma, sans-serif;
+    padding-top: 10px;
+}
+
+a:link, a:visited {
+		color:#ffffff;
+		text-decoration:underline;}
+
+a:hover {
+		color:#FF0000;
+		text-decoration:none;
+}
+
+#header {
+    width: 370px;
+    height: 210px;
+    /*background: #000 url("tree2.jpg") no-repeat;*/
+    background-position: top left;
+}
+
+#wrapper {
+    width: 800px;
+    background: #e70cb7;
+    background-position: 0 0;
+    border: solid 8px #fff;
+    margin: 0 auto;
+    text-align: center;
+    font-size: 20px;
+    color: #000000;
+}
+
+
+#footer {
+    font-size: 10px;
+    clear: both;
+    width: 370px;
+    margin-left: 163px;
+}
+
+.scandaloh_title {
+    font-size: 30px;
+    color: #000000;
+}

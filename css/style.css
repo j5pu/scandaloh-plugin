@@ -1,0 +1,48 @@
+
+body {
+ font-family: "Noto sans",sans-serif;
+ background: #b1b0ad;
+ width: 30em;
+ margin-left: 3%;
+ margin-right: 3%;
+ margin-top: 2%;
+ margin-bottom: 5%;
+}
+
+.formulario {
+	width: 90%;
+}
+
+.etiqueta {
+	color: #5760ff;
+}
+
+.oculto {
+	color: #80c1df;
+}
+
+#saved {
+	margin-left:-6%;
+}
+
+.error {
+    color: red;
+}
+
+.imagen {
+	margin-left: 48%;
+	margin-top: -17%;
+	height: 78px;
+	/*width: 42%;*/
+}
+
+.imagen2 {
+	margin-left: 48%;
+	margin-top: -16.5%;
+	height: 42%;
+	width: 42%;
+}
+
+.bottom {
+	margin-bottom: 1%;
+}
