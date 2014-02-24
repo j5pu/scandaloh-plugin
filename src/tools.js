@@ -16,28 +16,9 @@ function ajaxRequest(service, data, callback_ok, callback_err){
         url: SCANDALOH_SERVER_URL + service,
         type: 'post',
         data: JSON.stringify(data),
-        timeout: 5000,
+        timeout: 15000,
         headers: {"Content-Type": "application/json; charset=utf-8"}
     }).done(callback_ok).fail(callback_err);
-}
-
-/**
- * //TODO: Checks server connection
- * @param server
- */
-function checkServerConnection(server){
-    $.ajax({
-        url: MNOPI_SERVER_URL + SERVER_PING,
-        timeout: 5000,
-        success: function(){
-            active = true;
-        },
-        error: function(req, err){
-            if (err == 'timeout'){
-                //TODO
-            }
-        }
-    })
 }
 
 /**

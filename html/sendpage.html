@@ -27,7 +27,7 @@
       <div style="font-size: 1em;">
       <div id="original_title" class="scandaloh_title"><p> <span id="page_title"></span></p>
       </div>
-          <div id="scandaloh_image"></div>
+          <div><canvas id="scandaloh_image"></canvas></div>
           <input type="email" class="form-control formulario" id="edited_title" placeholder="New title here" style="display: none">
           <br>
           <p id="page_url">Link</p>
@@ -268,8 +268,10 @@
                       <option value="ZW">Zimbabue</option>
           </select>
           </br></br>
-          <input type="radio" name="scandaloh_type" value="humor" checked="true"/> Humor
+          <input id="humor_radio" type="radio" name="scandaloh_type" value="humor" checked="true"/> Humor
           <input type="radio" name="scandaloh_type" value="denuncia" /> Denuncia
+      </br></br>
+          <input id="scandaloh_comment" placeholder="Comment here" size="50">
           </form>
 
       </div>

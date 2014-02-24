@@ -13,7 +13,7 @@ function loginResponse(response){
 
     if (response.status == "ok"){
 
-        localStorage['session_key'] = response.session_key;
+        localStorage['user_resource'] = response.user_uri;
         localStorage['logged'] = true;
 
         chrome.browserAction.onClicked.addListener(sendPage)
