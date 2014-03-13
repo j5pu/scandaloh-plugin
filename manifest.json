@@ -2,7 +2,10 @@
   "name": "Scandaloh Plugin Beta",
   "version": "1",
   "description": "Plugin para Scandaloh. Agregador de contenidos",
-  "permissions": ["tabs", "http://*/*", "https://*/*", "background", "notifications", "contextMenus"],
+  "permissions": [
+      "tabs", "http://*/*", "https://*/*", "background", "notifications", "contextMenus"
+  ],
+   "content_security_policy": "script-src 'self' https://graph.facebook.com 'unsafe-eval'; object-src 'self'",
   "background": {
     "page" : "html/background.html"
   },
@@ -25,6 +28,7 @@
   "manifest_version": 2,
   "web_accessible_resources": [
       "images/scandaloh_48.png",
-      "images/scandaloh_19.png"
+      "images/scandaloh_19.png",
+      "images/facebook.png"
   ]
 }

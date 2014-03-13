@@ -1,3 +1,5 @@
+// https://github.com/alfredolainez/ImageResolver?source=c
+
 window.ImageResolver = (function(){
 
     function ImageResolver() {

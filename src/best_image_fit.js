@@ -1,7 +1,6 @@
 /**
  * Content Script to retrieve src from the most important image of the web
  */
-
 chrome.runtime.onMessage.addListener(
     function(message, sender, sendResponse){
         console.log("Sending to Scandaloh");

@@ -1,3 +1,4 @@
+// Global controlling whether the title has been manually edited
 var editing_title = false;
 
 $(function(){
@@ -8,7 +9,7 @@ $(function(){
 
     if (localStorage["scandaloh_image_url"] != undefined){
         // Set image on Canvas
-        var canvas = document.getElementById("scandaloh_image")
+        var canvas = document.getElementById("scandaloh_image");
         var context = canvas.getContext('2d');
         var imageObj = new Image();
 
@@ -19,6 +20,18 @@ $(function(){
         };
         imageObj.src = localStorage["scandaloh_image_url"];
     }
+
+    // Get page favicon
+    var favCanvas = document.getElementById("favicon");
+    var favContext = favCanvas.getContext('2d');
+    var faviconObj = new Image();
+
+    faviconObj.onload = function() {
+        favCanvas.setAttribute('width', faviconObj.width);
+        favCanvas.setAttribute('height', faviconObj.height);
+        favContext.drawImage(faviconObj, 0, 0);
+    };
+    faviconObj.src = "http://" + getUrlDomain(localStorage["scandaloh_page_url"]) + "/favicon.ico";
 
     var urlLink = "<a href= \"" + localStorage["scandaloh_page_url"] +"\" target=\"_blank\"></a>";
 
@@ -102,15 +115,21 @@ function send_scandaloh(){
     var scandaloh = Object();
 
     // Generate image data
-    var pic = document.getElementById("scandaloh_image").toDataURL("image/png");
-    pic = pic.replace(/^data:image\/(png|jpeg);base64,/, "");
+    var image = document.getElementById("scandaloh_image").toDataURL("image/png");
+    image = image.replace(/^data:image\/(png|jpeg);base64,/, "");
 
-    scandaloh.user = localStorage['user_resource'];
-    scandaloh.country = "ES"; //TODO
+    var favicon = document.getElementById("favicon").toDataURL("image/png");
+    favicon = favicon.replace(/^data:image\/(png|jpeg);base64,/, "");
+
+    //scandaloh.user = localStorage['user_resource'];
+    scandaloh.country = $('#country').val();
     scandaloh.category = ($('#humor_radio').is(':checked')) ? '/api/v1/category/1/' :
         '/api/v1/category/2/';
     scandaloh.title = (editing_title) ? $("#edited_title").val() : $("#page_title").text();
-    scandaloh.img = pic;
+    scandaloh.img = image;
+    scandaloh.source = localStorage["scandaloh_page_url"];
+    scandaloh.favicon = favicon;
+    scandaloh.media_type = 1;
 
     // Retrieve comment
     var comment = $('#scandaloh_comment').val();
@@ -125,22 +144,4 @@ function send_scandaloh(){
             }
         }, scandalohError)
     }
-
-//    var formData = new FormData();
-//
-//    formData.append("user", scandaloh.user);
-//    formData.append("country", scandaloh.country);
-//    formData.append("category", scandaloh.category);
-//    formData.append("title", scandaloh.title);
-//    formData.append("img", pic, "lol.png");
-
-//    $.ajax({
-//        url: SCANDALOH_SERVER_URL + POST_SERVICES["send_scandaloh"],
-//        type: "POST",
-//        data: formData,
-//        processData: false,  // tell jQuery not to process the data
-//        contentType: false,   // tell jQuery not to set contentType
-//        timeout: 5000
-//    }).done(scandalohResponse).fail(scandalohError);;
-
 }

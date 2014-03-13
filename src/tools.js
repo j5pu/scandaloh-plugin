@@ -89,3 +89,14 @@ function showErrorOnPopup(message){
     }
     return false;
 }
+
+/**
+ * Getes domain from a url
+ * @param url
+ * @returns hostname
+ */
+function getUrlDomain(url) {
+  var    a      = document.createElement('a');
+         a.href = url;
+  return a.hostname;
+}
