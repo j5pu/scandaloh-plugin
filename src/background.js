@@ -26,12 +26,12 @@ function onFacebookLogin() {
                 var params = tabs[i].url.split('#')[1];
                 accessToken = params.split('&')[0].split('=')[1];
 
-                chrome.tabs.remove(tabs[i].id);
                 localStorage['fb_logged'] = true;
 
                 loginWithFb(accessToken);
 
                 chrome.tabs.onUpdated.removeListener(onFacebookLogin);
+                chrome.tabs.remove(tabs[i].id);
                 return;
             }
         }
@@ -116,7 +116,7 @@ function login(username, password) {
 function menuClickCallback(clickData){
 
     if (localStorage['logged'] == "true"){
-        chrome.tabs.query({'active': true}, function(tabs) {
+        chrome.tabs.query({'active': true, 'currentWindow': true}, function(tabs) {
             localStorage["scandaloh_page_url"] = tabs[0].url;
             localStorage["scandaloh_page_title"] = tabs[0].title;
             localStorage["scandaloh_image_url"] = clickData.srcUrl;
