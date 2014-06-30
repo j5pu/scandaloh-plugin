@@ -1,5 +1,7 @@
 // Global controlling whether the title has been manually edited
 var editing_title = false;
+var preview_data = null;
+
 
 $(function(){
 
@@ -7,6 +9,7 @@ $(function(){
         send_scandaloh();
     });
 
+    /*
     if (localStorage["scandaloh_image_url"] != undefined){
         // Set image on Canvas
         var canvas = document.getElementById("scandaloh_image");
@@ -32,15 +35,24 @@ $(function(){
         favContext.drawImage(faviconObj, 0, 0);
     };
     faviconObj.src = "http://" + getUrlDomain(localStorage["scandaloh_page_url"]) + "/favicon.ico";
+    */
 
     var urlLink = "<a href= \"" + localStorage["scandaloh_page_url"] +"\" target=\"_blank\"></a>";
 
-    $('#page_title').text(localStorage["scandaloh_page_title"]);
-
-    // Create links to original web
-    $('#page_url').wrap(urlLink);
-    $('#page_title').wrap(urlLink);
-    $('#scandaloh_image').wrap(urlLink);
+    ajaxRequest(
+        POST_SERVICES['preview_url'],
+        {"url": localStorage["scandaloh_page_url"]},
+        function(response){
+            preview_data = response;
+            $('#scandaloh_image').append('<img src="' + response.img + '">');
+            $('#favicon').append('<img src="' + response.favicon + '">');
+            $('#page_title').text(response.title);
+            // Create links to original web
+            $('#page_title').wrap(urlLink);
+            $('#scandaloh_image').wrap(urlLink);
+        },
+        scandalohError
+    );
 
     $("#edit_title").click(function(){
         if (!editing_title) {
@@ -61,7 +73,6 @@ $(function(){
             $("#page_title").wrap(urlLink);
         }
     })
-
 });
 
 var scandalohController = {
@@ -76,6 +87,7 @@ var scandalohController = {
 
 };
 
+/**
 function commentResponse(response){
     if (response.status == "error"){
         showNotification("Error con comentario", response.reason, "/images/scandaloh_48.png", 4000);
@@ -96,6 +108,7 @@ function sendComment(userResource, photoResource, text){
 
     ajaxRequest(POST_SERVICES['send_comment'], comment, commentResponse, commentError);
 }
+ */
 
 function scandalohResponse(response){
     if (response.status == "error"){
@@ -114,6 +127,7 @@ function scandalohError(response){
 function send_scandaloh(){
     var scandaloh = Object();
 
+    /*
     // Generate image data
     var image = document.getElementById("scandaloh_image").toDataURL("image/png");
     image = image.replace(/^data:image\/(png|jpeg);base64,/, "");
@@ -122,13 +136,15 @@ function send_scandaloh(){
     favicon = favicon.replace(/^data:image\/(png|jpeg);base64,/, "");
 
     //scandaloh.user = localStorage['user_resource'];
+    */
+
     scandaloh.country = $('#country').val();
     scandaloh.category = ($('#humor_radio').is(':checked')) ? '/api/v1/category/1/' :
         '/api/v1/category/2/';
     scandaloh.title = (editing_title) ? $("#edited_title").val() : $("#page_title").text();
-    scandaloh.img = image;
-    scandaloh.source = localStorage["scandaloh_page_url"];
-    scandaloh.favicon = favicon;
+    scandaloh.img = preview_data.img;
+    scandaloh.source = preview_data.source;
+    scandaloh.favicon = preview_data.favicon;
     scandaloh.media_type = 1;
 
     // Retrieve comment

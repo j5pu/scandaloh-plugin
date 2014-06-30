@@ -16,7 +16,7 @@ function ajaxRequest(service, data, callback_ok, callback_err){
         url: SCANDALOH_SERVER_URL + service,
         type: 'post',
         data: JSON.stringify(data),
-        timeout: 15000,
+        timeout: 20000,
         headers: {"Content-Type": "application/json; charset=utf-8"}
     }).done(callback_ok).fail(callback_err);
 }

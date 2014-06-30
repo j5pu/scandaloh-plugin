@@ -136,8 +136,6 @@ function sendPage(){
     chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
         chrome.tabs.sendMessage(tabs[0].id, {'content': "bestFit", 'url': tabs[0].url}, function(response) {
             localStorage["scandaloh_page_url"] = tabs[0].url;
-            localStorage["scandaloh_page_title"] = tabs[0].title;
-            localStorage["scandaloh_image_url"] = response.bestFit;
             chrome.tabs.create({url: 'html/sendpage.html'});
         });
     });

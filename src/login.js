@@ -1,6 +1,6 @@
 $(function(){
     $('#signin').click(start)
-})
+});
 
 function show_error(message){
     $('#errors').css({'display':''})
