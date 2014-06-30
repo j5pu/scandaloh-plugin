@@ -62,7 +62,7 @@ $(function(){
         }
     })
 
-})
+});
 
 var scandalohController = {
 
@@ -74,7 +74,7 @@ var scandalohController = {
         $("page_url").text(url);
     }
 
-}
+};
 
 function commentResponse(response){
     if (response.status == "error"){
@@ -133,15 +133,18 @@ function send_scandaloh(){
 
     // Retrieve comment
     var comment = $('#scandaloh_comment').val();
+    if (comment != ""){
+        scandaloh.comment = comment;
+    }
 
     if (scandaloh.title == ""){
         showNotification("Error", "Introduce un título para el scandaloh", "/images/scandaloh_48.png", 4000);
     } else {
         ajaxRequest(POST_SERVICES['send_scandaloh'], scandaloh, function(response){
-            scandalohResource = scandalohResponse(response)
-            if (comment != ""){
-                sendComment(scandaloh.user, scandalohResource, comment);
-            }
+            scandalohResource = scandalohResponse(response);
+            window.setTimeout(function(){
+                window.close();
+            }, 4100);
         }, scandalohError)
     }
 }

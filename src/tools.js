@@ -56,11 +56,9 @@ function isValidUrl(url) {
  */
 function showNotification(title, text, image, show_time){
 
-    var notification = webkitNotifications.createNotification(image, title, text);
-    notification.show();
-
+    var notification = new Notification(title, {body: text, icon: image});
     window.setTimeout(function(){
-        notification.cancel();
+        notification.close();
     }, 4000);
 }
 
